@@ -1,5 +1,6 @@
 #Follow these steps
 1. Clone this repo locally
+1. Insert given credentials into provider.tf   
 1. ```shell
    cd terraform
    ```
@@ -18,7 +19,15 @@
    ```  
 1. compile
 1. run compiled program
+1. create new volume
+   - 10gb
+   - add tag "Name:bootcamp"
+1. attach to instance
+   - format the volume
+   - ensure volume will mount to "/bootcamp" on reboot
+   - reboot and show volume
 1. run 
    ```sh
    terraform destroy
    ```
+   - delete extra volume from console

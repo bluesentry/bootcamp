@@ -1,6 +1,6 @@
 locals {
   availability_zones = [
-    data.aws_availability_zones.main.names[0],
+    data.aws_availability_zones.main.names[1],
   ]
 
   name = "bootcamp"
