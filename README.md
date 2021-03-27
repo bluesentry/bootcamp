@@ -1,4 +1,4 @@
-#Follow these steps
+# Follow these steps
 1. Clone this repo locally
 1. Insert given credentials into provider.tf   
 1. ```shell
