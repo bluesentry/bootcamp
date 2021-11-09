@@ -10,7 +10,6 @@ resource "aws_key_pair" "generated" {
   public_key = tls_private_key.default.public_key_openssh
 }
 
-# Random characters added to secret name, making it unique and allowing plan -destory and recreate, since secrets are not deleted right away
 resource "random_string" "name" {
   length  = 4
   special = false
