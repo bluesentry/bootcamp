@@ -1,9 +1,5 @@
 variable "candidate_name" {
-  description = "Candidates name"
-}
-
-variable "candidate_password" {
-  default = "BSCCandidate100"
+  description = "Candidate's name"
 }
 
 variable "keybase_username" {
