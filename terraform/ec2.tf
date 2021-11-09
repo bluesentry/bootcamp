@@ -26,6 +26,7 @@ resource "aws_instance" "this" {
   ami                     = data.aws_ami.this.id
   disable_api_termination = false
   ebs_optimized           = true
+  iam_instance_profile    = module.instance_role.iam_instance_profile_name
   instance_type           = t3.small
   key_name                = aws_key_pair.generated.key_name
   subnet_id               = module.vpc.public_subnets[0]
@@ -78,4 +79,16 @@ resource "aws_security_group_rule" "ingress" {
   description = "Do Not Remove"
 
   security_group_id = aws_security_group.this.id
+}
+
+module "instance_role" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+
+  role_name = local.name
+
+  create_instance_profile = true
+  create_role             = true
+  custom_role_policy_arns = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
+  role_requires_mfa       = false
+  trusted_role_services   = ["ec2.amazonaws.com"]
 }

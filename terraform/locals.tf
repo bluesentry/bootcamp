@@ -3,7 +3,7 @@ locals {
     data.aws_availability_zones.main.names[1],
   ]
 
-  name = "bootcamp"
+  name = "bootcamp-${random_string.name.result}"
 
   public_subnets = [
     cidrsubnet(local.vpc_cidr, 6, 0),
