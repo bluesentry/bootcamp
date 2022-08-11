@@ -3,5 +3,6 @@ output "public_ip" {
 }
 
 output "ssh_key" {
-  value = tls_private_key.default.private_key_pem
+  value     = tls_private_key.default.private_key_pem
+  sensitive = true
 }
