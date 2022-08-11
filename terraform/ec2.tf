@@ -53,7 +53,7 @@ resource "aws_instance" "this" {
   vpc_security_group_ids = [aws_security_group.this.id]
 
   tags = {
-    Name = "${ local.name }_linux"
+    Name = "${local.name}_linux"
   }
 
   lifecycle {
@@ -81,14 +81,14 @@ resource "aws_eip_association" "windows" {
 }
 
 resource "aws_instance" "windows" {
-  ami = data.aws_ami.windows_2019.id
+  ami                     = data.aws_ami.windows_2019.id
   disable_api_termination = false
   ebs_optimized           = true
   iam_instance_profile    = module.instance_role.iam_instance_profile_name
   instance_type           = "t3.small"
   key_name                = aws_key_pair.generated.key_name
   subnet_id               = module.vpc.public_subnets[0]
-  vpc_security_group_ids = [aws_security_group.windows.id]
+  vpc_security_group_ids  = [aws_security_group.windows.id]
 
   root_block_device {
     encrypted   = true
@@ -97,12 +97,12 @@ resource "aws_instance" "windows" {
   }
 
   tags = {
-    Name = "${ local.name }_windows"
+    Name = "${local.name}_windows"
   }
 }
 
 resource "aws_security_group" "this" {
-  name        = "${ local.name }_linux"
+  name        = "${local.name}_linux"
   vpc_id      = module.vpc.vpc_id
   description = local.name
 }
@@ -129,7 +129,7 @@ resource "aws_security_group_rule" "ingress" {
 }
 
 resource "aws_security_group" "windows" {
-  name        = "${ local.name }_windows"
+  name        = "${local.name}_windows"
   vpc_id      = module.vpc.vpc_id
   description = local.name
 }
