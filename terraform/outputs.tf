@@ -14,3 +14,11 @@ output "iam_user" {
 output "iam_password" {
   value = aws_iam_user_login_profile.this.password
 }
+
+output "access_key_id" {
+  value = aws_iam_access_key.this.id
+}
+
+output "access_key_secret" {
+  value = aws_iam_access_key.this.secret
+}
