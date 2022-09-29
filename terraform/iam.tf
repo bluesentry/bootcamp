@@ -1,7 +1,5 @@
-resource "aws_iam_user" "this" {
-  force_destroy = true
-  name          = var.candidate_name
-  tags          = local.tags
+resource "aws_iam_access_key" "this" {
+  user = aws_iam_user.this.name
 }
 
 resource "aws_iam_group_membership" "this" {
@@ -10,10 +8,12 @@ resource "aws_iam_group_membership" "this" {
   users = [aws_iam_user.this.name]
 }
 
-resource "aws_iam_user_login_profile" "this" {
-  user = aws_iam_user.this.name
+resource "aws_iam_user" "this" {
+  force_destroy = true
+  name          = var.candidate_name
+  tags          = local.tags
 }
 
-resource "aws_iam_access_key" "this" {
+resource "aws_iam_user_login_profile" "this" {
   user = aws_iam_user.this.name
 }

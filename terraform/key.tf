@@ -10,8 +10,3 @@ resource "aws_key_pair" "generated" {
   public_key = tls_private_key.default.public_key_openssh
   tags       = local.tags
 }
-
-resource "random_string" "name" {
-  length  = 4
-  special = false
-}
