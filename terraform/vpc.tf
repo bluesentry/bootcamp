@@ -5,6 +5,7 @@ module "vpc" {
 
   azs            = local.availability_zones
   cidr           = local.vpc_cidr
-  name           = local.name
+  name           = "${var.candidate_name}_vpc"
   public_subnets = local.public_subnets
+  tags           = local.tags
 }
