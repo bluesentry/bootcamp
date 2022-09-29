@@ -22,6 +22,18 @@ data "aws_ami" "windows_2019" {
   owners = ["amazon"]
 }
 
+module "instance_role" {
+  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
+
+  role_name = "${var.candidate_name}_instance_role"
+
+  create_instance_profile = true
+  create_role             = true
+  custom_role_policy_arns = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
+  role_requires_mfa       = false
+  trusted_role_services   = ["ec2.amazonaws.com"]
+}
+
 resource "aws_eip" "this" {
   vpc = true
 
@@ -158,14 +170,3 @@ resource "aws_security_group_rule" "ingress" {
 #  security_group_id = aws_security_group.windows.id
 #}
 
-module "instance_role" {
-  source = "terraform-aws-modules/iam/aws//modules/iam-assumable-role"
-
-  role_name = "${var.candidate_name}_instance_role"
-
-  create_instance_profile = true
-  create_role             = true
-  custom_role_policy_arns = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
-  role_requires_mfa       = false
-  trusted_role_services   = ["ec2.amazonaws.com"]
-}
