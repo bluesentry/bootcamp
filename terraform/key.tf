@@ -12,6 +12,7 @@ resource "aws_key_pair" "generated" {
   depends_on = [tls_private_key.default]
   key_name   = each.value
   public_key = tls_private_key.default[each.key].public_key_openssh
+
   tags       = {
     Name = each.value
   }

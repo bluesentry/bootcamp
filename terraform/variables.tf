@@ -15,7 +15,8 @@ locals {
 }
 
 variable "candidate_names" {
-  default = []
+  default     = []
+
   description = "list of candidate names, lower case, formatted as firstname.lastname"
   type        = list(string)
 }
