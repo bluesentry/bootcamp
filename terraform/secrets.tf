@@ -10,7 +10,7 @@ resource "aws_secretsmanager_secret_version" "this" {
 
   secret_id = aws_secretsmanager_secret.this[each.key].id
 
-  secret_string = replace(replace(jsonencode(flatten([
+  secret_string = trim(jsonencode(flatten([
     for name, random_pet in local.pet_association : [
       for username, password in aws_iam_user_login_profile.this : [
         for key, secret_values in aws_iam_access_key.this : [
@@ -24,5 +24,5 @@ resource "aws_secretsmanager_secret_version" "this" {
         ] if key == each.key
       ] if username == each.key
     ] if name == each.key
-  ])), "[", ""), "]", "")
+  ])), "[]")
 }
