@@ -17,6 +17,9 @@ resource "aws_iam_user" "this" {
 
   force_destroy = true
   name          = each.key
+  tags = {
+    Provisioner = "Terraform"
+  }
 }
 
 resource "aws_iam_user_login_profile" "this" {

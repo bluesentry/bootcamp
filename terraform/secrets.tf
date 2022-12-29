@@ -1,7 +1,7 @@
 resource "aws_secretsmanager_secret" "this" {
   for_each = local.pet_association
 
-  name        = "${each.key}-credentials"
+  name        = "${each.key}.credentials"
   description = "Credentials for ${each.key}"
 }
 

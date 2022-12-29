@@ -44,7 +44,8 @@ resource "aws_eip" "linux" {
     create_before_destroy = true
   }
   tags = {
-    Name = each.value
+    Name        = each.value
+    Provisioner = "Terraform"
   }
 }
 
@@ -53,7 +54,8 @@ resource "aws_eip" "windows" {
 
   vpc = true
   tags = {
-    Name = each.value
+    Name        = each.value
+    Provisioner = "Terraform"
   }
 
   lifecycle {
@@ -95,7 +97,8 @@ resource "aws_instance" "linux" {
   vpc_security_group_ids = [aws_security_group.linux[each.key].id]
 
   tags = {
-    Name = "${each.value}_linux"
+    Name        = "${each.value}_linux"
+    Provisioner = "Terraform"
   }
 
   lifecycle {
@@ -128,7 +131,8 @@ resource "aws_instance" "windows" {
   }
 
   tags = {
-    Name = "${each.value}_windows"
+    Name        = "${each.value}_windows"
+    Provisioner = "Terraform"
   }
 }
 
@@ -140,7 +144,8 @@ resource "aws_security_group" "linux" {
   vpc_id      = module.vpc.vpc_id
 
   tags = {
-    Name = each.value
+    Name        = each.value
+    Provisioner = "Terraform"
   }
 }
 
@@ -152,7 +157,8 @@ resource "aws_security_group" "windows" {
   description = "sg_for_${each.value}_windows_instance"
 
   tags = {
-    Name = each.value
+    Name        = each.value
+    Provisioner = "Terraform"
   }
 }
 

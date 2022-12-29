@@ -13,7 +13,8 @@ resource "aws_key_pair" "generated" {
   key_name   = each.value
   public_key = tls_private_key.default[each.key].public_key_openssh
 
-  tags       = {
-    Name = each.value
+  tags = {
+    Name        = each.value
+    Provisioner = "Terraform"
   }
 }
