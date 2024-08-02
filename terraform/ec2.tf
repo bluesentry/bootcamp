@@ -44,7 +44,7 @@ resource "aws_instance" "this" {
   }
 
   lifecycle {
-    ignore_changes = [ami, user_data]
+    ignore_changes = [user_data]
   }
 
   user_data = <<EOF
